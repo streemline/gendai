@@ -166,7 +166,7 @@ export default function Statistics() {
         <Link href="/">
           <Button variant="outline">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            {t.stats.back}
+            {t.navigation.home}
           </Button>
         </Link>
         <DropdownMenu>
