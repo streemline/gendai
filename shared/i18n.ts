@@ -1,4 +1,41 @@
 export const translations = {
+  en: {
+    form: {
+      date: "Date",
+      eventName: "Event Name",
+      eventLocation: "Event Location",
+      description: "Description",
+      startTime: "Start Time",
+      endTime: "End Time",
+      breakDuration: "Break (minutes)",
+      hourlyRate: "Hourly Rate",
+      totalHours: "Total Hours",
+      totalAmount: "Total Amount",
+      submit: "Save Work Entry",
+      signature: "Signature"
+    },
+    statistics: {
+      title: "Statistics",
+      hoursChart: "Hours per day",
+      amountChart: "Amount per day",
+      exportPdf: "Export to PDF",
+      exportExcel: "Export to Excel",
+      totalHours: "Total Hours",
+      totalAmount: "Total Amount"
+    },
+    auth: {
+      login: "Log in",
+      register: "Register",
+      logout: "Log out",
+      email: "Email",
+      password: "Password",
+      name: "Name"
+    },
+    navigation: {
+      statistics: "Statistics",
+      home: "Home"
+    }
+  },
   ru: {
     form: {
       date: "Дата",

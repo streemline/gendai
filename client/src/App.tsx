@@ -58,3 +58,92 @@ function App() {
 }
 
 export default App;
+import { createContext, useState, useEffect } from "react";
+import { Route, Switch, useLocation } from "wouter";
+import { Toaster } from "@/components/ui/toaster";
+import Home from "@/pages/home";
+import Statistics from "@/pages/statistics";
+import Login from "@/pages/login";
+import Register from "@/pages/register";
+import { translations, type Language } from "@shared/i18n";
+
+export const LanguageContext = createContext<{
+  t: typeof translations.en;
+  language: Language;
+  setLanguage: (lang: Language) => void;
+}>({
+  t: translations.en,
+  language: "en",
+  setLanguage: () => {},
+});
+
+function App() {
+  const [language, setLanguage] = useState<Language>("en");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [, navigate] = useLocation();
+
+  // Load language preference from localStorage
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("language") as Language;
+    if (savedLanguage && translations[savedLanguage]) {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  // Check authentication status
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    setIsAuthenticated(!!token);
+  }, []);
+
+  // When language changes, save to localStorage
+  useEffect(() => {
+    localStorage.setItem("language", language);
+  }, [language]);
+
+  // Protected route component
+  const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+    const [, navigate] = useLocation();
+    
+    useEffect(() => {
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        navigate("/login");
+      }
+    }, [navigate]);
+    
+    return isAuthenticated ? <>{children}</> : null;
+  };
+
+  return (
+    <LanguageContext.Provider
+      value={{
+        t: translations[language],
+        language,
+        setLanguage,
+      }}
+    >
+      <Toaster />
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/statistics">
+          <ProtectedRoute>
+            <Statistics />
+          </ProtectedRoute>
+        </Route>
+        <Route path="/">
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        </Route>
+      </Switch>
+    </LanguageContext.Provider>
+  );
+}
+
+export default App;

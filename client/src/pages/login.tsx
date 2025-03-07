@@ -152,3 +152,33 @@ export default function Login() {
     </div>
   );
 }
+import { LoginForm } from "@/components/login-form";
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+import { LanguageSwitcher } from "@/components/language-switcher";
+
+export default function Login() {
+  return (
+    <div className="container mx-auto py-8">
+      <div className="flex justify-between items-center mb-8">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-800">Work Time Tracking</h1>
+          <p className="text-sm text-gray-600">GENDAI s.r.o.</p>
+        </div>
+        <LanguageSwitcher />
+      </div>
+      <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h2 className="text-xl font-semibold mb-4">Log in to your account</h2>
+        <LoginForm />
+        <div className="mt-4 text-center">
+          <p className="text-sm text-gray-600">
+            Don't have an account?{" "}
+            <Link href="/register">
+              <a className="text-blue-600 hover:underline">Register</a>
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
