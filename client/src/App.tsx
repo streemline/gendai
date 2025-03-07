@@ -8,6 +8,7 @@ import Home from "@/pages/home";
 import Statistics from "@/pages/statistics";
 import NotFound from "@/pages/not-found";
 import Login from "@/pages/login";
+import Register from "@/pages/register";
 
 export const LanguageContext = React.createContext<{
   language: Language;
@@ -24,6 +25,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
       <Route path="/statistics" component={Statistics} />
       <Route component={NotFound} />
     </Switch>
@@ -57,21 +59,7 @@ function App() {
   );
 }
 
-export default App;
-import { createContext, useState, useEffect } from "react";
-import { Route, Switch, useLocation } from "wouter";
-import { Toaster } from "@/components/ui/toaster";
-import Statistics from "@/pages/statistics";
-import Login from "@/pages/login";
-import Register from "@/pages/register";
-import { translations, type Language } from "@shared/i18n";
-
-export const LanguageContext = createContext<{
-  t: typeof translations.en;
-  language: Language;
-  setLanguage: (lang: Language) => void;
-}>({
-  t: translations.en,
+export default App;ations.en,
   language: "en",
   setLanguage: () => {},
 });
