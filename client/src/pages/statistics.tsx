@@ -173,7 +173,7 @@ export default function Statistics() {
           <DropdownMenuTrigger asChild>
             <Button variant="outline">
               <FileDown className="w-4 h-4 mr-2" />
-              {t.form.export}
+              {t.form?.export || "Export"}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -201,7 +201,7 @@ export default function Statistics() {
 
         <Card>
           <CardHeader>
-            <CardTitle>{t.stats.totalAmount}</CardTitle>
+            <CardTitle>{t.statistics?.totalAmount || t.stats?.totalAmount}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totalAmount.toFixed(2)} Kč</div>
@@ -211,7 +211,7 @@ export default function Statistics() {
 
       <Card>
         <CardHeader>
-          <CardTitle>{t.stats.byDay}</CardTitle>
+          <CardTitle>{t.statistics?.byDay || t.stats?.byDay}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="h-[400px]">
@@ -221,7 +221,7 @@ export default function Statistics() {
                 <XAxis dataKey="date" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="hours" fill="#2563eb" name={t.stats.totalHours} />
+                <Bar dataKey="hours" fill="#2563eb" name={t.statistics?.totalHours || t.stats?.totalHours} />
               </BarChart>
             </ResponsiveContainer>
           </div>
