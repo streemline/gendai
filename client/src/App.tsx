@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { Route, Switch, useLocation } from "wouter";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import Home from "@/pages/home";
 import Statistics from "@/pages/statistics";
@@ -57,24 +59,26 @@ function App() {
   };
 
   return (
-    <LanguageContext.Provider
-      value={{
-        t: translations[language],
-        language,
-        setLanguage,
-      }}
-    >
-      <div className="min-h-screen bg-background text-foreground">
-        <Toaster />
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/statistics" component={Statistics} />
-          <Route component={NotFound} />
-        </Switch>
-      </div>
-    </LanguageContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <LanguageContext.Provider
+        value={{
+          t: translations[language],
+          language,
+          setLanguage,
+        }}
+      >
+        <div className="min-h-screen bg-background text-foreground">
+          <Toaster />
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/statistics" component={Statistics} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </LanguageContext.Provider>
+    </QueryClientProvider>
   );
 }
 
