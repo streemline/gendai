@@ -125,13 +125,13 @@ export default function Statistics() {
     });
 
     const finalY = (doc as any).lastAutoTable.finalY || 220;
-    
+
     doc.setFontSize(10);
     doc.text("součet hodin:", 14, finalY + 10);
     doc.text(`${totalHours.toFixed(2)}`, 50, finalY + 10);
     doc.text("CELKEM K ÚHRADĚ:", 14, finalY + 20);
     doc.text(`${totalAmount.toFixed(2)} Kč`, 50, finalY + 20);
-    
+
     doc.text("podpis pracovníka:", 120, finalY + 50);
 
     const fileName = `work-entries-${format(new Date(), 'yyyy-MM')}.pdf`;
@@ -192,10 +192,10 @@ export default function Statistics() {
       <div className="grid grid-cols-2 gap-4 mb-8">
         <Card>
           <CardHeader>
-            <CardTitle>{t.stats.totalHours}</CardTitle>
+            <CardTitle>{t.statistics?.totalHours || t.stats?.totalHours}</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{totalHours.toFixed(2)}</div>
+            <div className="text-2xl font-bold">{totalHours.toFixed(2)} h</div>
           </CardContent>
         </Card>
 
